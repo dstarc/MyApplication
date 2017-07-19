@@ -11,8 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     >
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
 
-<LinearLayout
+ <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -28,7 +33,9 @@
         android:textColor="#FBFCFC"
         android:textSize="20sp"
         android:textColorHint="#B3B6B7"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        />
 
     <EditText
         android:id="@+id/email_rgpage"
@@ -86,4 +93,5 @@
         android:textAllCaps="false"/>
 
 </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

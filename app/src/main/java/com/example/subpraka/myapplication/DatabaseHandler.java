@@ -72,6 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public boolean searchpass(String uEmail , String uPassword) {
+
         SQLiteDatabase db = this.getReadableDatabase();
         final Cursor cursor = db.rawQuery("SELECT email_id , password from " + TABLE_USER +" where "+ KEY_EMAIL
                 + " = '"+ uEmail + "' AND " + KEY_PASSWORD + "  = '" + uPassword + "'" , null);

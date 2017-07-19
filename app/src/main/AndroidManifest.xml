@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +24,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:noHistory="true"/>
+            android:noHistory="false"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -37,7 +38,7 @@
             android:noHistory="true" />
         <activity
             android:name=".activity.RegisterActivity"
-            android:noHistory="true" />
+            android:noHistory="false" />
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +46,21 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0 & getIntent()
+                .getExtras() == null) {
+            finish();
+            return;
+        }
+
+//        if (!isTaskRoot()
+//                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
+//                && getIntent().getAction() != null
+//                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
+//
+//            finish();
+//            return;
+//        }
 
         mFingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         linkedinbutton = (Button) findViewById(R.id.li_signin);
@@ -85,19 +101,27 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 
             @Override
             public void onClick(View v) {
+                final String email = userEmail.getText().toString();
+                final String userPassword = etPassword.getText().toString();
 
-                boolean result = handler.searchpass(userEmail.getText().toString(),
-                        etPassword.getText().toString());
-
-                if (result) {
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, MainPageActivity.class);
-                    startActivity(intent);
-                    userEmail.setText("");
-                    etPassword.setText("");
-
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    userEmail.setError("Please enter email id");
+                }else if (userPassword.isEmpty()){
+                    etPassword.setError("First enter password");
                 } else {
-                    Toast.makeText(MainActivity.this, "Please enter valid credentials.", Toast.LENGTH_SHORT).show();
+                    boolean result = handler.searchpass(userEmail.getText().toString(),
+                            etPassword.getText().toString());
+
+                    if (result) {
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, MainPageActivity.class);
+                        startActivity(intent);
+                        userEmail.setText("");
+                        etPassword.setText("");
+
+                    } else {
+                        Toast.makeText(MainActivity.this, "Please enter valid credentials.", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
@@ -170,6 +194,8 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 //        startActivity(intent);
 //    }
+
+
     }
 
 
