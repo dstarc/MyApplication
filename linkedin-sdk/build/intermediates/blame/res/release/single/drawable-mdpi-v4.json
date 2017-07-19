@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\subpraka\\Desktop\\New folder\\MyApplication\\linkedin-sdk\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\subpraka\\Desktop\\New folder\\MyApplication\\linkedin-sdk\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\subpraka\\Desktop\\Saved Projects\\Login Full Functional\\MyApplication\\linkedin-sdk\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\subpraka\\Desktop\\Saved Projects\\Login Full Functional\\MyApplication\\linkedin-sdk\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     }

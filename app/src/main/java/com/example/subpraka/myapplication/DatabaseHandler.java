@@ -108,7 +108,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //            while (cursor.moveToNext());
 //        }
 
+    }
+
+    public boolean searchUser(String uEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        final Cursor cursor = db.rawQuery("SELECT email_id from " + TABLE_USER + " where " + KEY_EMAIL
+                + " = '" + uEmail + "'", null);
+
+        cursor.moveToFirst();
+        return cursor.getCount() > 0;
 
     }
+
 
 }

@@ -15,6 +15,9 @@ import com.example.subpraka.myapplication.MainActivity;
 import com.example.subpraka.myapplication.R;
 import com.example.subpraka.myapplication.UserInfo;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by subpraka on 7/11/2017.
  */
@@ -34,6 +37,15 @@ public class RegisterActivity extends AppCompatActivity {
     Button rgRegisterBtn;
     EditText rgCnfPassword;
     DatabaseHandler db = new DatabaseHandler(RegisterActivity.this);
+
+    public static boolean isValidPassword(final String password) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,33 +76,44 @@ public class RegisterActivity extends AppCompatActivity {
                         String cnfPassword = rgCnfPassword.getText().toString();
 
 
-                        if (finalName.isEmpty()|| finalName.length()>32){
+                        boolean resultUser = db.searchUser(rgEmail.getText().toString());
+
+                        if (finalName.isEmpty() || finalName.length() > 32) {
                             rgName.setError("Please enter name first");
                             return;
                         }
-                        if (finalEmail.isEmpty()||!Patterns.EMAIL_ADDRESS.matcher(finalEmail).matches()){
+                        if (finalEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(finalEmail).matches()) {
                             rgEmail.setError("Please enter valid email");
                             return;
                         }
-                        if (finalPassword.isEmpty()|| finalPassword.length()>12){
-                            rgPassword.setError("Please Enter valid password");
+                        if (resultUser) {
+                            Toast.makeText(RegisterActivity.this, "User already exists! Try with different email id", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if (finalPassword.isEmpty() || !isValidPassword(finalPassword)) {
+                            rgPassword.setError("Password must contain a special character ,number and an upper case letter");
                             return;
                         }
                         if (!finalPassword.equals(cnfPassword)) {
-                            Toast.makeText(RegisterActivity.this, "Password doesn't match! Re-enter password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Password doesn't match! Re-enter " +
+                                    "password", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        else {
                             long rowID = db.addUser(new UserInfo(finalName, finalEmail, finalPassword));
                             if (rowID != -1) {
-                                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Registration Successful",
+                                        Toast.LENGTH_SHORT).show();
                                 Intent toLoginIntent = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(toLoginIntent);
-                            } else {
+                                rgName.setText("");
+                                rgEmail.setText("");
+                                rgPassword.setText("");
+                                rgCnfPassword.setText("");
+
+                            }else {
                                 Toast.makeText(RegisterActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
                             }
                         }
-
 
 //                        if (!finalPassword.equals(cnfPassword)) {
 //                            Toast.makeText(RegisterActivity.this, "Password doesn't match! Re-enter password", Toast.LENGTH_SHORT).show();
@@ -109,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                                Toast.makeText(RegisterActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
 //                            }
 //                        }
-                    }
+
                 });
             }
 

@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, MainPageActivity.class);
                     startActivity(intent);
+                    userEmail.setText("");
+                    etPassword.setText("");
 
                 } else {
                     Toast.makeText(MainActivity.this, "Please enter valid credentials.", Toast.LENGTH_SHORT).show();
