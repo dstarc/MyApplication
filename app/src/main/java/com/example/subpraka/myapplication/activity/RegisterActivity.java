@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
 //    private EditText inputPassword;
 //    private ProgressDialog pDialog;
 //    private SQLiteHandler db;
+
     private Button linkToLoginScreen ;
     EditText rgName;
     EditText rgEmail;
