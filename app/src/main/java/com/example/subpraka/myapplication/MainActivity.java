@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
         });
 
 
+
         final EditText userEmail = (EditText) findViewById(R.id.email);
         final EditText etPassword = (EditText) findViewById(R.id.password);
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
