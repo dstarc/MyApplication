@@ -50,7 +50,8 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:hint="Email Id"
-            style="@style/editText_style"/>
+            style="@style/editText_style"
+            android:digits="@string/login_input_limit"/>
 
         <EditText
             android:id="@+id/password"
@@ -85,7 +86,8 @@
                 android:id="@+id/fb_login_btn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"/>
 
             <Button
                 android:id="@+id/li_signin"
@@ -93,7 +95,8 @@
                 android:layout_height="28dp"
                 android:layout_weight="1"
                 android:layout_gravity="right"
-                android:background="@drawable/ic_linkedin_icon"/>
+                android:background="@drawable/ic_linkedin_icon"
+                android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
 
@@ -105,7 +108,7 @@
             android:layout_margin="10dp"
             android:text="Register"
             android:textAllCaps="false"
-            android:textColor="#D0D3D4"
+            android:textColor="#17202A"
             android:textSize="18sp"
             android:textStyle="bold"
 

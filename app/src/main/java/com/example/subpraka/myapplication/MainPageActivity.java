@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.subpraka.myapplication.helper.SessionManager;
+
 public class MainPageActivity extends AppCompatActivity {
 
     private Button logoutBtn;
@@ -15,13 +17,22 @@ public class MainPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+        final SessionManager session = new SessionManager(this);
 
-     logoutBtn=(Button)findViewById(R.id.btnLogout);
+        if (!session.isLoggedIn()) {
+            session.setLogin(false);
+            finish();
+            startActivity(new Intent(MainPageActivity.this, MainActivity.class));
+        }
+        logoutBtn = (Button) findViewById(R.id.btnLogout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent logoutintent = new Intent(MainPageActivity.this,MainActivity.class);
-                startActivity(logoutintent);
+//                Intent logoutIntent = new Intent(MainPageActivity.this,MainActivity.class);
+//                startActivity(logoutIntent);
+                session.setLogin(false);
+                finish();
+                startActivity(new Intent(MainPageActivity.this, MainActivity.class));
                 Toast.makeText(MainPageActivity.this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
             }
         });

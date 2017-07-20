@@ -53,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        db= new DatabaseHandler(this);
+
         linkToLoginScreen = (Button)findViewById(R.id.btnLinkToLoginScreen);
         linkToLoginScreen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                 rgPassword = (EditText) findViewById(R.id.password_rgpage);
                  rgCnfPassword= (EditText)findViewById(R.id.cnf_Password_rgpage);
                 rgRegisterBtn = (Button) findViewById(R.id.btnRegister_rgpage);
+
                 rgRegisterBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -75,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
                         String finalEmail = rgEmail.getText().toString();
                         String finalPassword = rgPassword.getText().toString();
                         String cnfPassword = rgCnfPassword.getText().toString();
-
 
                         boolean resultUser = db.searchUser(rgEmail.getText().toString());
 
@@ -104,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (rowID != -1) {
                                 Toast.makeText(RegisterActivity.this, "Registration Successful",
                                         Toast.LENGTH_SHORT).show();
+                                finish();
                                 Intent toLoginIntent = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(toLoginIntent);
                                 rgName.setText("");
@@ -135,9 +138,12 @@ public class RegisterActivity extends AppCompatActivity {
 //                        }
 
                 });
+
             }
 
+    private void register(){
 
+    }
 
     }
 

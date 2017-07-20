@@ -41,26 +41,26 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
     private SessionManager session;
     AlertDialog alertDialog;
     DatabaseHandler handler = new DatabaseHandler(this);
+    private SplashActivity.Session newSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0 & getIntent()
-                .getExtras() == null) {
-            finish();
-            return;
-        }
-
-//        if (!isTaskRoot()
-//                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-//                && getIntent().getAction() != null
-//                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-//
+//        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0 & getIntent()
+//                .getExtras() == null) {
 //            finish();
 //            return;
 //        }
+
+
+        session=new SessionManager(this);
+        if (session.isLoggedIn()){
+            Intent sessionIntent= new Intent(MainActivity.this,MainPageActivity.class);
+            startActivity(sessionIntent);
+            finish();
+        }
 
         mFingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         linkedinbutton = (Button) findViewById(R.id.li_signin);
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
             }
         });
 
-            //this is the change what is made after account change
 
         final EditText userEmail = (EditText) findViewById(R.id.email);
         final EditText etPassword = (EditText) findViewById(R.id.password);
@@ -119,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
                         startActivity(intent);
                         userEmail.setText("");
                         etPassword.setText("");
-
+                         session.setLogin(true);
                     } else {
                         Toast.makeText(MainActivity.this, "Please enter valid credentials.", Toast.LENGTH_SHORT).show();
                     }
@@ -152,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //                }
             }
         });
+                   /** Facebook login */
 
         fbLogInButton = (LoginButton) findViewById(R.id.fb_login_btn);
         callbackManager = CallbackManager.Factory.create();
@@ -186,9 +186,8 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
         });
 //        if (AccessToken.getCurrentAccessToken()==null){
 //            goLoginScreen();
-//        }
 //
-//    }
+//  }
 //
 //    private void goLoginScreen() {
 //        Intent intent = new Intent(this,MainPageActivity.class);
@@ -196,11 +195,10 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //        startActivity(intent);
 //    }
 
-
     }
 
 
-    /* Fingerprint Authentication code */
+                       /** Fingerprint Authentication code */
     @Override
     protected void onResume() {
         super.onResume();
@@ -306,10 +304,8 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
         super.onActivityResult(requestCode, resultCode, data);
         LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
 
-
         callbackManager.onActivityResult(requestCode, resultCode, data);
         Toast.makeText(this, "successful login ", Toast.LENGTH_SHORT).show();
     }
-
 
 }
