@@ -4,14 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ProgressBar;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT= 2000;
+    private ProgressBar splashProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        splashProgressBar=(ProgressBar)findViewById(R.id.progressBar);
+       // splashProgressBar.setProgressTintList(ColorStateList.valueOf(Color.CYAN));
+        splashProgressBar.setScaleY(3f);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                doWork();
+               // startApp();
+                finish();
+            }
+        }).start();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -21,7 +35,35 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         },SPLASH_TIME_OUT);
+
+
     }
+
+    private void doWork(){
+
+        for (int progress=0; progress<40500; progress+=10) {
+            try {
+                Thread.sleep(100);
+                splashProgressBar.setProgress(progress);
+            } catch (Exception e) {
+                e.printStackTrace();
+               // Timber.e(e.getMessage());
+            }
+
+            if (progress==4000){
+                Intent splashIntent= new Intent(SplashActivity.this,MainActivity.class);
+                startActivity(splashIntent);
+                finish();
+            }
+        }
+    }
+
+//    private void startApp(){
+//
+//
+//    }
+
+                  /** Shared Preferences Content */
 
 //    public class Session{
 //
@@ -43,4 +85,6 @@ public class SplashActivity extends AppCompatActivity {
 //            return prefs.getBoolean("loggedInMode" , false);
 //        }
 //    }
+
+
 }
