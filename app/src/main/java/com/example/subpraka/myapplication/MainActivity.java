@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
     private SessionManager session;
     AlertDialog alertDialog;
     DatabaseHandler handler = new DatabaseHandler(this);
-    private SplashActivity.Session newSession;
+   // private SplashActivity.Session newSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +54,14 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //            return;
 //        }
 
+        /** Handling session here */
 
-        session=new SessionManager(this);
-        if (session.isLoggedIn()){
-            Intent sessionIntent= new Intent(MainActivity.this,MainPageActivity.class);
-            startActivity(sessionIntent);
-            finish();
-        }
+//        session=new SessionManager(this);
+//        if (session.isLoggedIn()){
+//            Intent sessionIntent= new Intent(MainActivity.this,MainPageActivity.class);
+//            startActivity(sessionIntent);
+//            finish();
+//        }
 
         mFingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
         linkedinbutton = (Button) findViewById(R.id.li_signin);
@@ -118,7 +119,9 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
                         startActivity(intent);
                         userEmail.setText("");
                         etPassword.setText("");
-                         session.setLogin(true);
+                        //Below line session code
+                         //session.setLogin(true);
+
                     } else {
                         Toast.makeText(MainActivity.this, "Please enter valid credentials.", Toast.LENGTH_SHORT).show();
                     }
