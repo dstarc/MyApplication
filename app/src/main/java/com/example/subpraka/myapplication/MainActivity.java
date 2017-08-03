@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //            return;
 //        }
 
-        /** Handling session here */
+        /** Handling session here ... Shared preferences data */
 
 //        session=new SessionManager(this);
 //        if (session.isLoggedIn()){

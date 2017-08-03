@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void doWork(){
 
-        for (int progress=0; progress<40500; progress+=10) {
+        for (int progress=0; progress<38000; progress+=10) {
             try {
                 Thread.sleep(100);
                 splashProgressBar.setProgress(progress);
@@ -50,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
                // Timber.e(e.getMessage());
             }
 
-            if (progress==4000){
+            if (progress==35000){
                 Intent splashIntent= new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(splashIntent);
                 finish();
