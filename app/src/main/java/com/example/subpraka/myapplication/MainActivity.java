@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
                     }
                 }
 
-
 //                    if (userName.length() == 0 && userPassword.length() == 0) {
 //                  Toast.makeText(MainActivity.this, "First Enter Your Credentials", Toast.LENGTH_LONG).show();
 //               }

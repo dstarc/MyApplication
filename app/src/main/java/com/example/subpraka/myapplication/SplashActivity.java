@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ProgressBar;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT= 2000;
+    private static int SPLASH_TIME_OUT= 1800;
     private ProgressBar splashProgressBar;
 
     @Override
@@ -50,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
                // Timber.e(e.getMessage());
             }
 
-            if (progress==35000){
+            if (progress==30000){
                 Intent splashIntent= new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(splashIntent);
                 finish();

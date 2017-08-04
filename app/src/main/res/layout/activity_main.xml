@@ -111,7 +111,6 @@
             android:textColor="#17202A"
             android:textSize="18sp"
             android:textStyle="bold"
-
             />
 
         <Button

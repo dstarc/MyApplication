@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Subhash</string>
     <string name="facebook_app_id">464878497222762</string>
     <string name="fb_login_protocol_scheme">fb464878497222762</string>
     <string name="hint_email">Email</string>
