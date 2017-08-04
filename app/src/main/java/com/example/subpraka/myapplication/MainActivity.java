@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
     private SessionManager session;
     AlertDialog alertDialog;
     DatabaseHandler handler = new DatabaseHandler(this);
-   // private SplashActivity.Session newSession;
+    // private SplashActivity.Session newSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,35 +67,42 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
         linkedinbutton = (Button) findViewById(R.id.li_signin);
         linkedinbutton.setOnClickListener(this);
 
-        btnFingerpeintSettings = (Button) findViewById(R.id.btn_fingerprint_settings);
-        btnFingerpeintSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callFingerprintSettingIntent = new Intent(Settings.ACTION_SETTINGS);
-//                Intent intentSettings = new Intent();
-//                intentSettings.setAction(Settings.EXTRA_INPUT_METHOD_ID);
-                MainActivity.this.startActivity(callFingerprintSettingIntent);
-            }
-        });
+//        btnFingerpeintSettings = (Button) findViewById(R.id.btn_fingerprint_settings);
+//        btnFingerpeintSettings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent callFingerprintSettingIntent = new Intent(Settings.ACTION_SETTINGS);
+////                Intent intentSettings = new Intent();
+////                intentSettings.setAction(Settings.EXTRA_INPUT_METHOD_ID);
+//                MainActivity.this.startActivity(callFingerprintSettingIntent);
+//            }
+//        });
 
 
         final EditText userEmail = (EditText) findViewById(R.id.email);
         final EditText etPassword = (EditText) findViewById(R.id.password);
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
-        final Button btnRegisterFront = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        //  final Button btnRegisterFront = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
         final String email = userEmail.getText().toString();
         final String userPassword = etPassword.getText().toString();
 
-        btnRegisterFront.setOnClickListener(new View.OnClickListener() {
+//        btnRegisterFront.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+//                startActivity(registerIntent);
+//            }
+//        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
             }
         });
-
-
         // Handling Login Button Click//
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 
                 if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     userEmail.setError("Please enter email id");
-                }else if (userPassword.isEmpty()){
+                } else if (userPassword.isEmpty()) {
                     etPassword.setError("First enter password");
                 } else {
                     boolean result = handler.searchpass(userEmail.getText().toString(),
@@ -120,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
                         userEmail.setText("");
                         etPassword.setText("");
                         //Below line session code
-                         //session.setLogin(true);
+                        //session.setLogin(true);
 
                     } else {
                         Toast.makeText(MainActivity.this, "Please enter valid credentials.", Toast.LENGTH_SHORT).show();
@@ -153,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //                }
             }
         });
-                   /** Facebook login */
+        /** Facebook login */
 
         fbLogInButton = (LoginButton) findViewById(R.id.fb_login_btn);
         callbackManager = CallbackManager.Factory.create();
@@ -179,13 +186,13 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
             }
         });
 
-        btnRegisterFront.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                MainActivity.this.startActivity(registerIntent);
-            }
-        });
+//        btnRegisterFront.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+//                MainActivity.this.startActivity(registerIntent);
+//            }
+//        });
 //        if (AccessToken.getCurrentAccessToken()==null){
 //            goLoginScreen();
 //
@@ -200,7 +207,9 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
     }
 
 
-                       /** Fingerprint Authentication code */
+    /**
+     * Fingerprint Authentication code
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -253,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
                 //Any recoverable error. Display message to the user.
                 break;
         }
-
     }
 
     private void showDialogFingerPrint() {
