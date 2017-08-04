@@ -106,17 +106,16 @@
             android:id="@+id/fab"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_gravity="bottom|center"
+            android:layout_gravity="bottom|end"
             android:src="@mipmap/ic_fabregister"
-            android:backgroundTint="#1C2833"
-            />
+            android:backgroundTint="#1C2833" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
+            android:layout_gravity="bottom|end"
             android:text="Click to register!"
-            android:textColor="#E5E7E9"
-            />
+            android:textColor="#E5E7E9" />
         <!--<Button-->
             <!--android:id="@+id/btnLinkToRegisterScreen"-->
             <!--style="@style/button_style"-->
@@ -139,8 +138,6 @@
             <!--android:layout_marginTop="10dp"-->
             <!--android:text="  Settings  "-->
             <!--android:visibility="invisible"/>-->
-
-
 
     </LinearLayout>
 
