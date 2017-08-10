@@ -29,9 +29,10 @@ import com.multidots.fingerprintauth.AuthErrorCodes;
 import com.multidots.fingerprintauth.FingerPrintAuthCallback;
 import com.multidots.fingerprintauth.FingerPrintAuthHelper;
 
-public class MainActivity extends AppCompatActivity implements FingerPrintAuthCallback, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements FingerPrintAuthCallback,
+        View.OnClickListener {
     FingerPrintAuthHelper mFingerPrintAuthHelper;
-    Button linkedinbutton;
+    Button linkedInButton;
 
     LoginButton fbLogInButton;
     CallbackManager callbackManager;
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //        }
 
         mFingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
-        linkedinbutton = (Button) findViewById(R.id.li_signin);
-        linkedinbutton.setOnClickListener(this);
+        linkedInButton = (Button) findViewById(R.id.li_signin);
+        linkedInButton.setOnClickListener(this);
 
 //        btnFingerpeintSettings = (Button) findViewById(R.id.btn_fingerprint_settings);
 //        btnFingerpeintSettings.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements FingerPrintAuthCa
 //                }
             }
         });
+
         /** Facebook login */
 
         fbLogInButton = (LoginButton) findViewById(R.id.fb_login_btn);

@@ -50,11 +50,6 @@ public class LinkedInLoginActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onClick(View v) {
-//
-//
-//    }
     private static Scope buildScope() {
         return Scope.build(Scope.R_BASICPROFILE, Scope.W_SHARE, Scope.R_EMAILADDRESS);
     }
